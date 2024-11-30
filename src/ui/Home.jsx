@@ -1,10 +1,11 @@
-function Home() {
+function Home ()
+{
   return (
     <div>
       <h1>
-        The best pizza.
+        Самая лучшая пицца.
         <br />
-        Straight out of the oven, straight to you.
+        Прямо из печи, прямо к Вашему столу.
       </h1>
     </div>
   );
