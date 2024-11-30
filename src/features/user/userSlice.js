@@ -1,21 +1,26 @@
-function getPosition() {
-  return new Promise(function (resolve, reject) {
+import { getAddress } from '../../services/apiGeocoding';
+
+function getPosition ()
+{
+  return new Promise(function (resolve, reject)
+  {
     navigator.geolocation.getCurrentPosition(resolve, reject);
   });
 }
 
-async function fetchAddress() {
-  // 1) We get the user's geolocation position
+async function fetchAddress ()
+{
+  // 1) получаем геолокационное местоположение пользователя
   const positionObj = await getPosition();
   const position = {
     latitude: positionObj.coords.latitude,
     longitude: positionObj.coords.longitude,
   };
 
-  // 2) Then we use a reverse geocoding API to get a description of the user's address, so we can display it the order form, so that the user can correct it if wrong
+  // 2) Затем используем API обратного геокодирования, чтобы получить описание адреса пользователя и отобразить его в форме заказа, чтобы пользователь мог исправить его в случае ошибки
   const addressObj = await getAddress(position);
   const address = `${addressObj?.locality}, ${addressObj?.city} ${addressObj?.postcode}, ${addressObj?.countryName}`;
 
-  // 3) Then we return an object with the data that we are interested in
+  // 3) Затем возвращаем объект с интересующими нас данными
   return { position, address };
 }

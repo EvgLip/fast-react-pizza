@@ -1,4 +1,4 @@
-import { useState } from "react";
+
 
 // https://uibakery.io/regex-library/phone-number
 const isValidPhone = (str) =>
@@ -30,7 +30,8 @@ const fakeCart = [
   },
 ];
 
-function CreateOrder() {
+function CreateOrder ()
+{
   // const [withPriority, setWithPriority] = useState(false);
   const cart = fakeCart;
 
@@ -63,8 +64,8 @@ function CreateOrder() {
             type="checkbox"
             name="priority"
             id="priority"
-            // value={withPriority}
-            // onChange={(e) => setWithPriority(e.target.checked)}
+          // value={withPriority}
+          // onChange={(e) => setWithPriority(e.target.checked)}
           />
           <label htmlFor="priority">Want to yo give your order priority?</label>
         </div>
