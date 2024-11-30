@@ -1,25 +1,28 @@
 const API_URL = 'https://react-fast-pizza-api.onrender.com/api';
 
+/////////////////////////////////////
 export async function getMenu ()
 {
   const res = await fetch(`${API_URL}/menu`);
 
   // fetch не выдает ошибку при 400-х ошибках (например, при неправильном URL), поэтому нам нужно сделать это вручную. Затем это будет отправлено в блок catch, где будет установлено сообщение
-  if (!res.ok) throw Error('Failed getting menu');
+  if (!res.ok) throw Error(`Не удалось загрузить меню.`);
 
   const { data } = await res.json();
   return data;
 }
 
+/////////////////////////////////////
 export async function getOrder (id)
 {
   const res = await fetch(`${API_URL}/order/${id}`);
-  if (!res.ok) throw Error(`Couldn't find order #${id}`);
+  if (!res.ok) throw Error(`Заказ #${id} не найден.`);
 
   const { data } = await res.json();
   return data;
 }
 
+/////////////////////////////////////
 export async function createOrder (newOrder)
 {
   try
@@ -41,6 +44,7 @@ export async function createOrder (newOrder)
   }
 }
 
+/////////////////////////////////////
 export async function updateOrder (id, updateObj)
 {
   try
