@@ -24,17 +24,18 @@ const fakeCart = [
   },
 ];
 
-function Cart() {
+function Cart ()
+{
   const cart = fakeCart;
 
   return (
     <div>
-      <Link to="/menu">&larr; Back to menu</Link>
+      <Link to="/menu">&larr; Назад в меню</Link>
 
       <h2>Your cart, %NAME%</h2>
 
       <div>
-        <Link to="/order/new">Order pizzas</Link>
+        <Link to="/order/new">Заказать пиццу</Link>
         <button>Clear cart</button>
       </div>
     </div>
