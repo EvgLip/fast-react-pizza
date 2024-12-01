@@ -5,7 +5,7 @@ export async function getMenu ()
 {
   const res = await fetch(`${API_URL}/menu`);
 
-  // fetch не выдает ошибку при 400-х ошибках (например, при неправильном URL), поэтому нам нужно сделать это вручную. Затем это будет отправлено в блок catch, где будет установлено сообщение
+  // fetch не выдает ошибку при 400-х ошибках (например, при неправильном URL), поэтому делаем это вручную. Затем это будет отправлено в блок catch, где будет установлено сообщение
   if (!res.ok) throw Error(`Не удалось загрузить меню.`);
 
   const { data } = await res.json();
@@ -40,7 +40,7 @@ export async function createOrder (newOrder)
     return data;
   } catch
   {
-    throw Error('Failed creating your order');
+    throw Error('Не удалось создать Ваш заказ');
   }
 }
 
@@ -58,9 +58,9 @@ export async function updateOrder (id, updateObj)
     });
 
     if (!res.ok) throw Error();
-    // We don't need the data, so we don't return anything
+    // Нам не нужны эти данные, поэтому мы ничего не возвращаем
   } catch (err)
   {
-    throw Error('Failed updating your order');
+    throw Error('Не удалось обновить Ваш заказ');
   }
 }

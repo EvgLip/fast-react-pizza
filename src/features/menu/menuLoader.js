@@ -1,7 +1,7 @@
 import { getMenu } from "../../services/apiRestaurant";
 
 
-export async function loaderMenu ()
+export async function loader ()
 {
   const menu = await getMenu();
   return menu;

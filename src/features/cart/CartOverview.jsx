@@ -8,7 +8,7 @@ function CartOverview ()
         <span>23 пиццы </span>
         <span>735 &#8381;</span>
       </p>
-      <Link to="/cart">Открыть карточку &rarr;</Link>
+      <Link to="/cart">Перейти в карзину &rarr;</Link>
     </div>
   );
 }

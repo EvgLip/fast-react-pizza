@@ -1,3 +1,4 @@
+import { Form } from "react-router-dom";
 
 
 // https://uibakery.io/regex-library/phone-number
@@ -30,30 +31,31 @@ const fakeCart = [
   },
 ];
 
-function CreateOrder ()
+export default function CreateOrder ()
 {
   // const [withPriority, setWithPriority] = useState(false);
   const cart = fakeCart;
 
   return (
     <div>
-      <h2>Ready to order? Let's go!</h2>
+      <h2>Оформление заказа</h2>
 
-      <form>
+      {/* <Form method="POST" > */}
+      <Form method="POST" action="/order/new">
         <div>
-          <label>First Name</label>
+          <label>Имя</label>
           <input type="text" name="customer" required />
         </div>
 
         <div>
-          <label>Phone number</label>
+          <label>Номер телефона</label>
           <div>
             <input type="tel" name="phone" required />
           </div>
         </div>
 
         <div>
-          <label>Address</label>
+          <label>Адрес</label>
           <div>
             <input type="text" name="address" required />
           </div>
@@ -67,15 +69,14 @@ function CreateOrder ()
           // value={withPriority}
           // onChange={(e) => setWithPriority(e.target.checked)}
           />
-          <label htmlFor="priority">Want to yo give your order priority?</label>
+          <label htmlFor="priority">{'Сделать заказ приоритетным (взимается дополнительная плата)'}</label>
         </div>
 
         <div>
-          <button>Order now</button>
+          <input type="hidden" name="cart" value={JSON.stringify(cart)} />
+          <button>Оформить заказ</button>
         </div>
-      </form>
+      </Form>
     </div>
   );
 }
-
-export default CreateOrder;

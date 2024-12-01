@@ -8,6 +8,7 @@ import CartOverview from "../features/cart/CartOverview";
 export default function AppLayout ()
 {
   const navigation = useNavigation();
+  // console.log(navigation)
   const isLoading = navigation.state === 'loading'; //навигация в состоянии загрузки данных
 
   return (
