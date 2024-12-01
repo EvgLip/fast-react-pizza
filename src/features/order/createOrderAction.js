@@ -1,6 +1,13 @@
 import { redirect } from "react-router-dom";
 import { createOrder } from "../../services/apiRestaurant";
 
+//источник регулярного выражения https://uibakery.io/regex-library/phone-number
+//возвращает true/false
+const isValidPhone = (str) =>
+  /^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/.test(
+    str
+  );
+
 export async function createOrderAction ({ request })
 {
   const formData = await request.formData();
@@ -12,7 +19,13 @@ export async function createOrderAction ({ request })
     priority: data.priority === 'on',
   };
 
-  const newOrder = await createOrder(order);
+  const errors = {};
+  if (!isValidPhone(order.phone))
+    errors.phone = 'Пожалуйста, сообщите Ваш действительный номер телефона. Он понадобится, чтобы связаться с Вами в процессе доставки заказа.';
 
+  //если есть ошибки - перехватить их в <CreateOrder />
+  if (Object.keys(errors).length > 0) return errors;
+  //иначе создать новый заказ и перенаправить на страницу заказа
+  const newOrder = await createOrder(order);
   return redirect(`/order/${newOrder.id}`);
 }
