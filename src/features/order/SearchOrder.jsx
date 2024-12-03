@@ -18,6 +18,7 @@ export default function SearchOrder ()
   return (
     <form onSubmit={handleSubmit}>
       <input
+        className="px-3 py-0.5 rounded-full"
         type="text"
         placeholder="Укажите номер заказа"
         value={order}

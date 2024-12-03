@@ -21,7 +21,7 @@ export async function createOrderAction ({ request })
 
   const errors = {};
   if (!isValidPhone(order.phone))
-    errors.phone = 'Пожалуйста, сообщите Ваш действительный номер телефона. Он понадобится, чтобы связаться с Вами в процессе доставки заказа.';
+    errors.invalidPhone = 'Пожалуйста, сообщите Ваш действительный номер телефона. Он понадобится, чтобы связаться с Вами в процессе доставки заказа.';
 
   //если есть ошибки - перехватить их в <CreateOrder />
   if (Object.keys(errors).length > 0) return errors;

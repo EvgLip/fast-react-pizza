@@ -12,14 +12,16 @@ export default function AppLayout ()
   const isLoading = navigation.state === 'loading'; //навигация в состоянии загрузки данных
 
   return (
-    <div className="layout">
+    <div className="grid grid-rows-[auto_1fr_auto] h-screen">
       {isLoading && <LoadingIndicator />}
 
       <Header />
 
-      <main>
-        <Outlet />
-      </main>
+      <div className="overflow-auto">
+        <main className="mx-auto max-w-3xl">
+          <Outlet />
+        </main>
+      </div>
 
       <CartOverview />
     </div>

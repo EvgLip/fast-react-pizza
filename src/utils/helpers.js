@@ -1,9 +1,9 @@
 export function formatCurrency (value)
 {
-  return new Intl.NumberFormat("en", {
+  return new Intl.NumberFormat("ru", {
     style: "currency",
-    currency: "EUR",
-  }).format(value);
+    currency: "RUB",
+  }).format(value * 60);
 }
 
 export function formatDate (dateStr)

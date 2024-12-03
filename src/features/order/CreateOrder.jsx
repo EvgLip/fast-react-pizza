@@ -1,4 +1,5 @@
 import { Form, useActionData, useNavigation } from "react-router-dom";
+import Button from "../../ui/Button";
 
 const fakeCart = [
   {
@@ -27,7 +28,7 @@ const fakeCart = [
 export default function CreateOrder ()
 {
   const formData = useActionData();
-  console.log('formData ', formData);
+  // console.log('formData ', formData);
   const navigation = useNavigation();
   // console.log(navigation);
   const isSubmiting = navigation.state === 'submitting';
@@ -35,53 +36,51 @@ export default function CreateOrder ()
   const cart = fakeCart;
 
   return (
-    <div>
-      <h2>Оформление заказа</h2>
+    <div className="px-4 py-6">
+      <h2 className="mb-2 text-xl font-semibold">
+        Оформление заказа
+      </h2>
 
       {/* <Form method="POST" > */}
       <Form method="POST" action="/order/new">
-        <div>
-          <label>Имя</label>
-          <input type="text" name="customer" required />
+        <div className="flex flex-col gap-2 mt-5 sm:flex-row sm:items-center">
+          <label className="sm:basis-16">Имя</label>
+          <input className="input grow" type="text" name="customer" required />
         </div>
 
-        <div>
-          <label>Номер телефона</label>
-          <div>
-            <input type="tel" name="phone" required />
-          </div>
-          {
-            formData?.phone && <p>{formData.phone}</p>
-          }
+        <div className="flex flex-col gap-2 mt-5 sm:flex-row sm:items-center">
+          <label className="sm:basis-16">Телефон</label>
+          <input className="input grow" type="tel" name="phone" required />
+        </div>
+        {formData?.invalidPhone && <p className="bg-red-100 text-sm text-red-600 italic">{formData.invalidPhone}</p>}
+
+        <div className="flex flex-col gap-2 mt-5 sm:flex-row sm:items-center">
+          <label className="sm:basis-16">Адрес</label>
+          <input className="input grow" type="text" name="address" required />
         </div>
 
-        <div>
-          <label>Адрес</label>
-          <div>
-            <input type="text" name="address" required />
-          </div>
-        </div>
-
-        <div>
-          <input
+        <div className="mt-5 flex gap-5 items-center">
+          <input className="h-6 w-6 accent-yellow-400 focus:outline-none focus:ring focus:ring-yellow-400 focus:ring-offset-2"
             type="checkbox"
             name="priority"
             id="priority"
           // value={withPriority}
           // onChange={(e) => setWithPriority(e.target.checked)}
           />
-          <label htmlFor="priority">{'Сделать заказ приоритетным (взимается дополнительная плата)'}</label>
+          <label htmlFor="priority" className="font-medium">
+            {'Сделать заказ приоритетным (взимается дополнительная плата)'}
+          </label>
         </div>
 
-        <div>
+        <div className="mt-12">
           <input type="hidden" name="cart" value={JSON.stringify(cart)} />
-          <button disabled={isSubmiting}>
+          <Button type="primary" disabled={isSubmiting}>
             {
               isSubmiting
                 ? 'Регистрация заказа...'
                 : 'Оформить заказ'
             }
-          </button>
+          </Button>
         </div>
       </Form>
     </div>
