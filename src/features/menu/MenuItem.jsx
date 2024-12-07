@@ -1,10 +1,26 @@
+import { useDispatch } from 'react-redux';
+
 import { formatCurrency } from '../../utils/helpers';
 import Button from '../../ui/Button';
+import { addItem } from '../cart/CartSlice';
 
 //eslint-disable-next-line
 function MenuItem ({ pizza })
-{
+{//eslint-disable-next-line
   const { id, name, unitPrice, ingredients, soldOut, imageUrl } = pizza;
+  const dispatch = useDispatch();
+
+  function handleAddToCart ()
+  {
+    const newItem = {
+      pizzaId: id,
+      name,
+      quantity: 1,
+      unitPrice,
+      totalPrice: unitPrice * 1,
+    };
+    dispatch(addItem(newItem));
+  }
 
   return (
     <li className="flex gap-4 py-2">
@@ -21,7 +37,12 @@ function MenuItem ({ pizza })
               ? <p className="text-sm">{formatCurrency(unitPrice)}</p>
               : <p className="text-sm font-medium uppercase text-stone-500">Распродано</p>
           }
-          <Button type="small">Добавить в корзину</Button>
+          {
+            !soldOut &&
+            <Button type="small" onClick={handleAddToCart}>
+              Добавить
+            </Button>
+          }
         </div>
       </div>
     </li>

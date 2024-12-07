@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 
 export default function UserName ()
 {
-  const userName = useSelector(state => state.user.username);
+  const userName = useSelector(state => state.user.userName);
 
   if (!userName) return null;
 

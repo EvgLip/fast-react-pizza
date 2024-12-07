@@ -1,7 +1,13 @@
+import { useSelector } from 'react-redux';
+
 import CreateUser from '../features/user/CreateUser';
+import Button from './Button';
+import { getUserName } from '../features/user/userSlice';
 
 function Home ()
 {
+  const userName = useSelector(getUserName);
+
   return (
     <div className='my-10 text-center'>
       <h1 className="mb-8 font-semibold text-xl">
@@ -11,7 +17,14 @@ function Home ()
           Прямо из печи к Вашему столу.
         </span>
       </h1>
-      <CreateUser />
+      {
+        userName === ''
+          ? <CreateUser />
+          : <Button type={'primary'} to={'/menu'}
+          >
+            Вернуться в меню
+          </Button>
+      }
     </div>
   );
 }
