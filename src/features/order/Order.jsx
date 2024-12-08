@@ -65,7 +65,7 @@ function Order ()
         {
           priority &&
           <p className="flex flex-wrap gap-2 justify-between items-center text-sm text-stone-600 font-medium">
-            <span>Наценка за приоритетность:</span>
+            <span>Наценка за приоритетность(20%):</span>
             <span>{formatCurrency(priorityPrice)}</span>
           </p>
         }

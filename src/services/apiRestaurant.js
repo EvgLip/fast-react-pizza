@@ -16,7 +16,7 @@ export async function getMenu ()
 export async function getOrder (id)
 {
   const res = await fetch(`${API_URL}/order/${id}`);
-  if (!res.ok) throw Error(`Заказ #${id} не найден.`);
+  if (!res.ok) throw Error(`Заказ № ${id} не найден (статус ${res.status} ${res.statusText})`);
 
   const { data } = await res.json();
   return data;
@@ -35,12 +35,12 @@ export async function createOrder (newOrder)
       },
     });
 
-    if (!res.ok) throw Error();
+    if (!res.ok) throw Error(`статус ${res.status} ${res.statusText}`);
     const { data } = await res.json();
     return data;
-  } catch
+  } catch (err)
   {
-    throw Error('Не удалось создать Ваш заказ');
+    throw Error(`Не удалось создать Ваш заказ (${err.message})`);
   }
 }
 
@@ -57,10 +57,10 @@ export async function updateOrder (id, updateObj)
       },
     });
 
-    if (!res.ok) throw Error();
+    if (!res.ok) throw Error(`статус ${res.status} ${res.statusText}`);
     // Нам не нужны эти данные, поэтому мы ничего не возвращаем
   } catch (err)
   {
-    throw Error('Не удалось обновить Ваш заказ');
+    throw Error(`Не удалось обновить Ваш заказ (${err.message})`);
   }
 }

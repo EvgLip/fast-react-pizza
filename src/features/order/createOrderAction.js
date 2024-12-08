@@ -1,6 +1,9 @@
 import { redirect } from "react-router-dom";
 import { createOrder } from "../../services/apiRestaurant";
 
+import store from '../../store';
+import { clearCart } from "../cart/CartSlice";
+
 //источник регулярного выражения https://uibakery.io/regex-library/phone-number
 //возвращает true/false
 const isValidPhone = (str) =>
@@ -16,7 +19,7 @@ export async function createOrderAction ({ request })
   const order = {
     ...data,
     cart: JSON.parse(data.cart),
-    priority: data.priority === 'on',
+    priority: data.priority === 'true',
   };
 
   const errors = {};
@@ -27,5 +30,9 @@ export async function createOrderAction ({ request })
   if (Object.keys(errors).length > 0) return errors;
   //иначе создать новый заказ и перенаправить на страницу заказа
   const newOrder = await createOrder(order);
+  //очищаем корзину
+  //не следует злоупотреблять прямым обращением к store
+  //это влияет на производительность
+  store.dispatch(clearCart());
   return redirect(`/order/${newOrder.id}`);
 }

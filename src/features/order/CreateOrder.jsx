@@ -1,38 +1,52 @@
 import { Form, useActionData, useNavigation } from "react-router-dom";
-import Button from "../../ui/Button";
 import { useSelector } from "react-redux";
+import { useState } from "react";
 
-const fakeCart = [
-  {
-    pizzaId: 12,
-    name: "Mediterranean",
-    quantity: 2,
-    unitPrice: 16,
-    totalPrice: 32,
-  },
-  {
-    pizzaId: 6,
-    name: "Vegetale",
-    quantity: 1,
-    unitPrice: 13,
-    totalPrice: 13,
-  },
-  {
-    pizzaId: 11,
-    name: "Spinach and Mushroom",
-    quantity: 1,
-    unitPrice: 15,
-    totalPrice: 15,
-  },
-];
+import Button from "../../ui/Button";
+import EmptyCart from "../cart/EmptyCart";
+
+import { getCart, getTotalCartPrice } from "../cart/CartSlice";
+import { formatCurrency } from "../../utils/helpers";
+import { getUserName } from "../user/userSlice";
+
+// const fakeCart = [
+//   {
+//     pizzaId: 12,
+//     name: "Mediterranean",
+//     quantity: 2,
+//     unitPrice: 16,
+//     totalPrice: 32,
+//   },
+//   {
+//     pizzaId: 6,
+//     name: "Vegetale",
+//     quantity: 1,
+//     unitPrice: 13,
+//     totalPrice: 13,
+//   },
+//   {
+//     pizzaId: 11,
+//     name: "Spinach and Mushroom",
+//     quantity: 1,
+//     unitPrice: 15,
+//     totalPrice: 15,
+//   },
+// ];
 
 export default function CreateOrder ()
 {
-  const userName = useSelector(state => state.user.userName);
+  const [withPriority, setWithPriority] = useState(false);
   const formData = useActionData();
   const navigation = useNavigation();
   const isSubmiting = navigation.state === 'submitting';
-  const cart = fakeCart;
+
+  const userName = useSelector(getUserName);
+  const cart = useSelector(getCart);
+  const totalCardPrice = useSelector(getTotalCartPrice);
+  const priorityPrice = withPriority ? totalCardPrice * 0.2 : 0;
+  const totalPrice = totalCardPrice + priorityPrice;
+
+  if (!cart.length) return <EmptyCart />;
 
   return (
     <div className="px-4 py-6">
@@ -70,21 +84,21 @@ export default function CreateOrder ()
             type="checkbox"
             name="priority"
             id="priority"
-          // value={withPriority}
-          // onChange={(e) => setWithPriority(e.target.checked)}
+            value={withPriority}
+            onChange={(e) => setWithPriority(e.target.checked)}
           />
           <label htmlFor="priority" className="font-medium">
-            {'Сделать заказ приоритетным (взимается дополнительная плата)'}
+            {'Сделать заказ приоритетным (дополнительно 20% от стоимости заказа)'}
           </label>
         </div>
 
         <div className="mt-12">
           <input type="hidden" name="cart" value={JSON.stringify(cart)} />
-          <Button type="primary" disabled={isSubmiting}>
+          <Button type="primaryBig" disabled={isSubmiting}>
             {
               isSubmiting
                 ? 'Регистрация заказа...'
-                : 'Оформить заказ'
+                : `Оформить заказ на ${formatCurrency(totalPrice)}`
             }
           </Button>
         </div>

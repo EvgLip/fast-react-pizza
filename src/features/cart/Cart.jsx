@@ -52,8 +52,8 @@ function Cart ()
         }
       </ul>
       <div className="mt-6 space-x-2">
-        <Button type="primary" to="/order/new">Сделать заказ</Button>
-        <Button type="secondary"
+        <Button type="primaryBig" to="/order/new">Сделать заказ</Button>
+        <Button type="secondaryBig"
           onClick={() => dispatch(clearCart())}
         >
           Очистить корзину
