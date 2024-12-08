@@ -17,6 +17,18 @@ export default function Button ({ children, disabled, to, type, onClick })
   const styles = {
     primary: base + 'px-4 py-3 md:px-6 md:py-4 text-xs min-[414px]:text-sm  ',
     small: base + 'px-3 py-2 ms:px-5 ms:py-2.5 text-xs ',
+    round: base + 'px-3 py-1 ms:px-3.5 ms:py-2 text-base ',
+    delete: 'inline-block ' +
+      'rounded-full ' +
+      'bg-red-200 ' +
+      'font-semibold uppercase tracking-wide ' +
+      'text-stone-800 ' +
+      'transition-colors duration-300 ' +
+      'hover:bg-red-300 ' +
+      'focus:bg-red-300 focus:outline-none ' +
+      'focus:ring focus:ring-red-300 focus:ring-offset-2 ' +
+      'disabled:cursor-not-allowed ' +
+      'px-3 py-2 ms:px-5 ms:py-2.5 text-xs ',
     secondary: 'inline-block ' +
       'px-4 py-2.5 md:px-6 md:py-3.5 ' +
       'rounded-full ' +

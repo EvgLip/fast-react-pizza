@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Button from '../../ui/Button';
 import DeleteCartItem from '../cart/DeleteCartItem';
 
-import { addItem, getCurrentQuantityById } from '../cart/CartSlice';
+import { addItem, getQuantityInCartById } from '../cart/CartSlice';
 import { formatCurrency } from '../../utils/helpers';
 
 //eslint-disable-next-line
@@ -11,8 +11,8 @@ function MenuItem ({ pizza })
 {//eslint-disable-next-line
   const { id, name, unitPrice, ingredients, soldOut, imageUrl } = pizza;
   const dispatch = useDispatch();
-  const currentQuantity = useSelector(getCurrentQuantityById(id));
-  const isInCart = currentQuantity > 0;
+  const quantityInCart = useSelector(getQuantityInCartById(id));
+  const isInCart = quantityInCart > 0;
 
   function handleAddToCart ()
   {
@@ -41,7 +41,7 @@ function MenuItem ({ pizza })
               ? <p className="text-sm">{formatCurrency(unitPrice)}</p>
               : <p className="text-sm font-medium uppercase text-stone-500">Распродано</p>
           }
-          {isInCart && <DeleteCartItem itemId={id}>Отменить</DeleteCartItem>}
+          {isInCart && <DeleteCartItem type="delete" itemId={id}>Отменить</DeleteCartItem>}
           {
             !soldOut && !isInCart &&
             <Button type="small" onClick={handleAddToCart}>

@@ -4,7 +4,7 @@ import Button from "../../ui/Button";
 import { deleteItem } from './CartSlice';
 
 //eslint-disable-next-line
-export default function DeleteCartItem ({ children, itemId })
+export default function DeleteCartItem ({ children, type, itemId })
 {
   const dispatch = useDispatch();
 
@@ -15,7 +15,7 @@ export default function DeleteCartItem ({ children, itemId })
 
   return (
     <div>
-      <Button type="small" onClick={handleDeleneItem}>
+      <Button type={type} onClick={handleDeleneItem}>
         {children}
       </Button>
     </div>

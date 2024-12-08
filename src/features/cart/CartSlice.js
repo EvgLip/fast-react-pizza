@@ -30,8 +30,13 @@ const cartSlice = createSlice(
       decreaseItemQuantity (state, action)
       { //action.payload = pizzaId
         const item = state.cart.find(item => item.pizzaId === action.payload);
+        //нельзя опускать кол-во меньше 1 шт
+        if (item.quantity === 1) return;
         item.quantity--;
         item.totalPrice = item.quantity * item.unitPrice;
+
+        //возможный вариант с удалением
+        //if (item.quantity === 0) cartSlice.caseReducers.deleteItem(state, action);
       },
 
       clearCart (state)
@@ -57,5 +62,5 @@ export const getTotalCartPrice =
 export const getCart = (state) => state.cart.cart;
 
 //формат item см в <MenuItem/>
-export const getCurrentQuantityById = (id) =>
+export const getQuantityInCartById = (id) =>
   (state) => state.cart.cart.find(item => item.pizzaId === id)?.quantity ?? 0;
