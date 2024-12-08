@@ -1,14 +1,18 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { formatCurrency } from '../../utils/helpers';
 import Button from '../../ui/Button';
-import { addItem } from '../cart/CartSlice';
+import DeleteCartItem from '../cart/DeleteCartItem';
+
+import { addItem, getCurrentQuantityById } from '../cart/CartSlice';
+import { formatCurrency } from '../../utils/helpers';
 
 //eslint-disable-next-line
 function MenuItem ({ pizza })
 {//eslint-disable-next-line
   const { id, name, unitPrice, ingredients, soldOut, imageUrl } = pizza;
   const dispatch = useDispatch();
+  const currentQuantity = useSelector(getCurrentQuantityById(id));
+  const isInCart = currentQuantity > 0;
 
   function handleAddToCart ()
   {
@@ -37,8 +41,9 @@ function MenuItem ({ pizza })
               ? <p className="text-sm">{formatCurrency(unitPrice)}</p>
               : <p className="text-sm font-medium uppercase text-stone-500">Распродано</p>
           }
+          {isInCart && <DeleteCartItem itemId={id}>Отменить</DeleteCartItem>}
           {
-            !soldOut &&
+            !soldOut && !isInCart &&
             <Button type="small" onClick={handleAddToCart}>
               Добавить
             </Button>

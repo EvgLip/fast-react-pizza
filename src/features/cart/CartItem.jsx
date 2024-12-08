@@ -1,9 +1,10 @@
-import Button from '../../ui/Button';
 import { formatCurrency } from '../../utils/helpers';
+import DeleteCartItem from './DeleteCartItem';
 
 //eslint-disable-next-line
 function CartItem ({ item })
 {
+  //eslint-disable-next-line
   const { pizzaId, name, quantity, totalPrice } = item;
 
   return (
@@ -13,7 +14,7 @@ function CartItem ({ item })
       </p>
       <div className="flex justify-between items-center sm:gap-6">
         <p className="text-sm font-bold">{formatCurrency(totalPrice)}</p>
-        <Button type="small">Удалить</Button>
+        <DeleteCartItem itemId={pizzaId}>Удалить</DeleteCartItem>
       </div>
     </li>
   );
