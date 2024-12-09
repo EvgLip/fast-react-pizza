@@ -5,7 +5,7 @@ export default function Error ()
 {
   const error = useRouteError();
 
-  console.log('Ошибка: ', error);
+  console.log('Объект ошибки: ', error);
 
   return (
     <div>

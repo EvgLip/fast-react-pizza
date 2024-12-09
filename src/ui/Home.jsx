@@ -20,10 +20,7 @@ function Home ()
       {
         userName === ''
           ? <CreateUser />
-          : <Button type="primaryBig" to={'/menu'}
-          >
-            Вернуться в меню
-          </Button>
+          : <Button type="primaryBig" to={'/menu'}>Вернуться в меню</Button>
       }
     </div>
   );

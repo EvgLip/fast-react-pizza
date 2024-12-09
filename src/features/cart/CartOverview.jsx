@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { declension, formatCurrency } from "../../utils/helpers";
-import { getTotalCartPrice, getTotalCartQuantity } from "./CartSlice";
+import { getTotalCartPrice, getTotalCartQuantity } from "./сartSlice";
 
 function CartOverview ()
 {

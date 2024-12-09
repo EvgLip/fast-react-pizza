@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Button from '../../ui/Button';
 import LinkButton from '../../ui/LinkButton';
 import CartItem from './CartItem';
-import { clearCart, getCart } from './CartSlice';
+import { clearCart, getCart } from './сartSlice';
 import { getUserName } from '../user/userSlice';
 import EmptyCart from './EmptyCart';
 

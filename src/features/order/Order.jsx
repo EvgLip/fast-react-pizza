@@ -1,9 +1,12 @@
-import { useLoaderData } from "react-router-dom";
+import { useFetcher, useLoaderData } from "react-router-dom";
 
 import OrderItem from '../order/OrderItem';
 import { calcMinutesLeft, formatCurrency, formatDate, } from "../../utils/helpers";
+import { useEffect } from "react";
+import UpdateOrder from "./UpdateOrder";
 
-//тестовые id: IIDSAT  CQE92U
+//тестовые id: IIDSAT  CQE92U  P2IIJ8
+//формат данных ниже
 
 function Order ()
 {
@@ -19,6 +22,13 @@ function Order ()
     cart,
   } = order;
   const deliveryIn = calcMinutesLeft(estimatedDelivery);
+  const fetcher = useFetcher();
+
+  useEffect(function ()
+  {
+    if (!fetcher.data && fetcher.state === 'idle')
+      fetcher.load('/menu');
+  }, [fetcher]);
 
   return (
     <div className="px-4 py-6 space-y-8">
@@ -50,10 +60,16 @@ function Order ()
           <span>{formatDate(estimatedDelivery)}</span>
         </p>
       </div>
-
+      {/*строки заказа*/}
       <ul className="divide-y divide-stone-200 border-t border-b">
         {
-          cart.map(item => <OrderItem item={item} key={item.pizzaId} />)
+          cart.map(item =>
+            <OrderItem
+              item={item}
+              ingredients={fetcher?.data?.find(el => el.id === item.pizzaId)?.ingredients ?? []}
+              isLoadingIngredients={fetcher.state === 'loading'}
+              key={item.pizzaId}
+            />)
         }
       </ul>
 
@@ -74,6 +90,11 @@ function Order ()
           <span>{formatCurrency(orderPrice + priorityPrice)}</span>
         </p>
       </div>
+
+      {
+        !priority &&
+        <UpdateOrder order={order} />
+      }
     </div>
   );
 }

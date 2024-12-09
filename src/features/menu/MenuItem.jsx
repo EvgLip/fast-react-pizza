@@ -4,7 +4,7 @@ import Button from '../../ui/Button';
 import DeleteCartItem from '../cart/DeleteCartItem';
 import UpdateItemQuantity from '../cart/UpdateItemQuantity';
 
-import { addItem, getQuantityInCartById } from '../cart/CartSlice';
+import { addItem, getQuantityInCartById } from '../cart/сartSlice';
 import { formatCurrency } from '../../utils/helpers';
 
 //eslint-disable-next-line

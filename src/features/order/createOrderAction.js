@@ -2,7 +2,7 @@ import { redirect } from "react-router-dom";
 import { createOrder } from "../../services/apiRestaurant";
 
 import store from '../../store';
-import { clearCart } from "../cart/CartSlice";
+import { clearCart } from "../cart/сartSlice";
 
 //источник регулярного выражения https://uibakery.io/regex-library/phone-number
 //возвращает true/false
@@ -11,7 +11,7 @@ const isValidPhone = (str) =>
     str
   );
 
-export async function createOrderAction ({ request })
+export default async function action ({ request })
 {
   const formData = await request.formData();
   const data = Object.fromEntries(formData);

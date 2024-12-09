@@ -6,7 +6,7 @@ import { BsGeoAlt } from "react-icons/bs";
 import Button from "../../ui/Button";
 import EmptyCart from "../cart/EmptyCart";
 
-import { getCart, getTotalCartPrice } from "../cart/CartSlice";
+import { getCart, getTotalCartPrice } from "../cart/сartSlice";
 import { formatCurrency } from "../../utils/helpers";
 import { fetchAddress, getUser } from "../user/userSlice";
 

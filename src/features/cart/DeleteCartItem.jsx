@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 
 import Button from "../../ui/Button";
-import { deleteItem } from './CartSlice';
+import { deleteItem } from './сartSlice';
 
 //eslint-disable-next-line
 export default function DeleteCartItem ({ children, type, itemId })

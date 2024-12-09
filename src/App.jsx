@@ -10,8 +10,9 @@ import Cart from './features/cart/Cart';
 
 import CreateOrder from './features/order/CreateOrder';
 import Order from './features/order/Order';
-import { orderLoader } from "./features/order/orderLoader";
-import { createOrderAction } from "./features/order/createOrderAction";
+import orderLoader from "./features/order/orderLoader";
+import createOrderAction from "./features/order/createOrderAction";
+import updateOrderAction from "./features/order/updateOrderAction";
 
 import AppLayout from "./ui/AppLayout";
 
@@ -40,6 +41,7 @@ const router = createBrowserRouter(
             element: <Order />,
             errorElement: <Error />,
             loader: orderLoader,
+            action: updateOrderAction,
           },
         ]
     },
